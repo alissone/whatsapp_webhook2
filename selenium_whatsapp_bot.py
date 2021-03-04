@@ -33,7 +33,7 @@ def paste_message(driver):
     box = driver.find_element_by_xpath('//*[@spellcheck="true"]')
     box.send_keys(Keys.CONTROL + "v")
 
-    sleep(3)
+    sleep(2)
     actions = ActionChains(driver)
     actions.send_keys(Keys.ENTER)
     actions.perform()
@@ -50,7 +50,7 @@ bot_name = "webhook"
 
 if os.path.isfile(f"{bot_name}.json"):
     driver = load_session(bot_name)
-    sleep(3)
+    sleep(1)
 else:
     bot = GenericBot(bot_name, "https://web.whatsapp.com/")
     bot.login()
