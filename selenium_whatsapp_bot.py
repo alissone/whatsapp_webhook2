@@ -41,8 +41,25 @@ else:
     driver = bot.driver
 
 
+from argparse import ArgumentParser
 
+parser = ArgumentParser()
 
-sleep(9)
-select_contact(driver, "Anotações")
-send_message(driver, "Nova Instância")
+parser.add_argument("-c", "--contact", dest="contact_name",
+ action='store', type=str,
+                    help="Select wich contact to send an message", default=True)
+
+parser.add_argument("-m", "--message",
+               dest="message_text", default=True,
+                     action='store', type=str,
+                    help="Message text to be sent")
+
+args = parser.parse_args()
+
+# Usage:
+# python3 -i selenium_whatsapp_bot.py -c "Anotações" -m "Teste"
+if __name__ == "__main__":
+    if args.contact_name is not None and args.message_text is not None:
+        sleep(9)
+        select_contact(driver, args.contact_name)
+        send_message(driver, args.message_text)
