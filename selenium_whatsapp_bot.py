@@ -45,9 +45,8 @@ def send_message(driver, message):
     box.send_keys(message + Keys.ENTER)
 
 
-# driver = login()
 bot_name = "webhook"
-
+# You should remove this file when you exit, I'm still trying to find a better way to do it =)
 
 if os.path.isfile(f"{bot_name}.json"):
     driver = load_session(bot_name)
