@@ -9,7 +9,7 @@ class GenericBot():
     """
 
     def __init__(self, name, home_url):
-        self.driver = build_driver(new_session=True)
+        self.driver = build_driver()
         self.name = name
         self.home_url = home_url
 
@@ -22,10 +22,12 @@ class GenericBot():
             bool: True if the user has already logged in
         """
         try:
-            return True
+            self.driver.get(self.home_url)
+            driver.find_element_by_css_selector("#app > div > div > div.landing-header").click()
+            return False
 
         except Exception as e:
-            return False
+            return True
 
     def login_function(self) -> bool:
         """Attempts to login on the page. Also store username and password
@@ -37,13 +39,12 @@ class GenericBot():
         print("Logging in...")
 
         try:
+            self.driver.get(self.home_url)
             print("Logged in sucessfully...")
-
             return True
 
         except Exception as e:
             print("Could not login because of", e)
-
             return False
 
     def open_url(self, url, wait=1):
@@ -58,8 +59,6 @@ class GenericBot():
         """
         Login and save a session to be used later
         """
-        self.open_url(self.home_url)
-
         logged_in = self.verify_if_logged_in()
 
         if not logged_in:
